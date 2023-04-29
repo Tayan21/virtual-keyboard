@@ -269,7 +269,7 @@ export const keyboard = {
   },
 
   triggerEvent(handlerName) {
-    console.log("Event Name " + handlerName);
+    console.log("Event Name hhh " + handlerName);
   },
 
   toggleCapsLock() {

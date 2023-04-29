@@ -13,7 +13,7 @@ export const animation = {
     let tabKey = document.querySelector(".tab_key");
 
     for (let i = 0; i < keys.length; i++) {
-      keys[i].setAttribute("keyname", keys[i].innerText);
+      keys[i].setAttribute("keyname", keys[i].innerText.toUpperCase());
       keys[i].setAttribute("lowerCaseName", keys[i].innerText.toLowerCase());
     }
 
