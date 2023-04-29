@@ -47,7 +47,7 @@ export const keyboard = {
       "K",
       "L",
       ":",
-      "\"",
+      '"',
       "Enter",
       "Shift",
       "Z",
@@ -136,7 +136,7 @@ export const keyboard = {
       "Down",
       "Right",
       "Ctrl",
-    ]
+    ],
   },
 
   eventHandlers: {
@@ -161,8 +161,7 @@ export const keyboard = {
 
     this.elements.row.appendChild(this.createKeys());
 
-    this.elements.keys = this.elements.row.querySelectorAll('.keys');
-    console.log(this.elements.keys)
+    this.elements.keys = this.elements.row.querySelectorAll(".keys");
 
     this.elements.keyboardKeys.append(this.elements.row);
     this.elements.keyboardWrap.append(this.elements.keyboardKeys);
@@ -173,12 +172,12 @@ export const keyboard = {
   createKeys() {
     const fragment = document.createDocumentFragment();
 
-    this.keys.keysLower.forEach((key) => {
+    for (let i = 0; i < this.keys.keysLower.length; i++) {
       const keyElement = document.createElement("div");
       keyElement.classList.add("keys");
-      keyElement.textContent = key;
+      keyElement.textContent = this.keys.keysLower[i];
 
-      switch (key) {
+      switch (this.keys.keysLower[i]) {
         case "Backspace":
           keyElement.classList.add("backspace_key");
           keyElement.addEventListener("click", () => {
@@ -209,6 +208,10 @@ export const keyboard = {
           });
           break;
 
+        case "Win":
+          keyElement.classList.add("win_key");
+          break;
+
         case "Space":
           keyElement.classList.add("space_key");
           keyElement.addEventListener("click", () => {
@@ -218,10 +221,13 @@ export const keyboard = {
           break;
 
         case "Shift":
-          keyElement.classList.add("shift_key");
-          keyElement.addEventListener("keydown", () => {
-            
-          });
+          if (this.keys.keysLower[i - 1] == "Enter") {
+            keyElement.classList.add("shift_key", "shift_left");
+          } else {
+            keyElement.classList.add("shift_key", "shift_right");
+          }
+
+          keyElement.addEventListener("keydown", () => {});
           break;
 
         case "Tab":
@@ -232,17 +238,33 @@ export const keyboard = {
           });
           break;
 
+        case "Alt":
+          if (this.keys.keysLower[i - 1] == "Win") {
+            keyElement.classList.add("alt_key", "alt_left");
+          } else {
+            keyElement.classList.add("alt_key", "alt_right");
+          }
+          break;
+
+        case "Ctrl":
+          if (this.keys.keysLower[i - 1] == "Shift") {
+            keyElement.classList.add("ctrl_key", "ctrl_left");
+          } else {
+            keyElement.classList.add("ctrl_key", "ctrl_right");
+          }
+          break;
+
         default:
           keyElement.addEventListener("click", () => {
             this.properties.value += this.properties.capslock
-              ? key.toUpperCase()
-              : key.toLowerCase();
+              ? this.keys.keysLower[i].toUpperCase()
+              : this.keys.keysLower[i].toLowerCase();
             this.triggerEvent("oninput");
           });
           break;
       }
       fragment.appendChild(keyElement);
-    });
+    }
     return fragment;
   },
 
@@ -255,9 +277,9 @@ export const keyboard = {
 
     for (let i = 0; i < this.elements.keys.length; i++) {
       if (this.properties.capslock) {
-        this.elements.keys[i].textContent = this.keys.keysUpper[i]
+        this.elements.keys[i].textContent = this.keys.keysUpper[i];
       } else {
-        this.elements.keys[i].textContent = this.keys.keysLower[i]
+        this.elements.keys[i].textContent = this.keys.keysLower[i];
       }
     }
   },
