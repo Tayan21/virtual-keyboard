@@ -1,5 +1,5 @@
 {
-  "name": "virtual-keyborad",
+  "name": "virtual-keyboard",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Tayan21/virtual-keyborad.git"
+    "url": "git+https://github.com/Tayan21/virtual-keyboard.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Tayan21/virtual-keyborad/issues"
+    "url": "https://github.com/Tayan21/virtual-keyboard/issues"
   },
-  "homepage": "https://github.com/Tayan21/virtual-keyborad#readme",
+  "homepage": "https://github.com/Tayan21/virtual-keyboard#readme",
   "devDependencies": {
     "eslint": "^8.39.0",
     "eslint-config-airbnb-base": "^15.0.0",
