@@ -1,9 +1,9 @@
 import {
   textarea, backspace, enter, space, tab,
 } from './textarea.js';
-import { getStorage } from './getStorage.js';
+import getStorage from './getStorage.js';
 
-export const keyboard = {
+const keyboard = {
   elements: {
     container: null,
     keyboardWrap: null,
@@ -646,3 +646,5 @@ export const keyboard = {
     }
   },
 };
+
+export default keyboard;

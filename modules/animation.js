@@ -1,8 +1,8 @@
 import { textarea } from './textarea.js';
-import { keyboard } from './keyboard.js';
-import { replaceLang } from './replaceLang.js';
+import keyboard from './keyboard.js';
+import replaceLang from './replaceLang.js';
 
-export const animation = {
+const animation = {
   init() {
     const keys = document.querySelectorAll('.keys');
     const spaceKey = document.querySelector('.space_key');
@@ -161,3 +161,5 @@ export const animation = {
     replaceLang(['ShiftLeft', 'AltLeft']);
   },
 };
+
+export default animation;
