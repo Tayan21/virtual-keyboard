@@ -15,6 +15,7 @@ export const animation = {
     let win_key = document.querySelector(".win_key");
     let tabKey = document.querySelector(".tab_key");
     let backspace = document.querySelector(".backspace_key");
+    let enter = document.querySelector(".enter_key");
 
     for (let i = 0; i < keys.length; i++) {
       keys[i].setAttribute("keyname", keys[i].innerText);
@@ -30,6 +31,7 @@ export const animation = {
         if (
           e.code == `Key${keys[i].innerText.toUpperCase()}` ||
           e.key == keys[i].getAttribute("keyname") && keys[i].getAttribute("keyname").length < 3 ||
+          e.key == keys[i].innerText && keys[i].innerText.length < 2 ||
           e.key == `Arrow${keys[i].getAttribute("keyname")}` ||
           e.key == `Arrow${keys[i].getAttribute("keyname")}` ||
           e.key == `Arrow${keys[i].getAttribute("keyname")}` ||
@@ -37,12 +39,15 @@ export const animation = {
         ) {
           keys[i].classList.add("active");
           textarea.value += keys[i].innerText;
-          console.log('r')
         }
 
         if (e.code == "Space" && keys[i].innerText == 'Space') {
           spaceKey.classList.add("active");
           textarea.value += ' ';
+        }
+        if (e.code == "Enter" && keys[i].innerText == 'Enter') {
+          enter.classList.add('active')
+          textarea.value += '\n';
         }
         if (e.code == "Tab" && keys[i].innerText == 'Tab') {
           e.preventDefault();
@@ -50,18 +55,27 @@ export const animation = {
           textarea.value += '     ';
         }
         if (e.code == "Backspace" && keys[i].innerText == 'Backspace') {
+          backspace.classList.add('active')
           textarea.value = textarea.value.substring(0, textarea.value.length - 1);
         }
         if (e.code == "ShiftLeft") {
+          shift_left.classList.add('active')
           shift_right.classList.remove("active");
+          keyboard.properties.shift = true;
+          keyboard.shiftPressed()
         }
         if (e.code == "ShiftRight") {
+          shift_right.classList.add('active')
           shift_left.classList.remove("active");
+          keyboard.properties.shift = true;
+          keyboard.shiftPressed()
         }
         if (e.code == "AltLeft") {
+          alt_left.classList.add("active");
           alt_right.classList.remove("active");
         }
         if (e.code == "AltRight") {
+          alt_right.classList.add("active");
           alt_left.classList.remove("active");
         }
         if (e.code == "ControlLeft") {
@@ -86,6 +100,7 @@ export const animation = {
         if (
           e.code == `Key${keys[i].innerText.toUpperCase()}` ||
           e.key == keys[i].getAttribute("keyname") ||
+          e.key == keys[i].innerText && keys[i].innerText.length < 2 ||
           e.key == `Arrow${keys[i].getAttribute("keyname")}` ||
           e.key == `Arrow${keys[i].getAttribute("keyname")}` ||
           e.key == `Arrow${keys[i].getAttribute("keyname")}` ||
@@ -105,10 +120,14 @@ export const animation = {
         if (e.code == "ShiftLeft") {
           shift_right.classList.remove("active");
           shift_right.classList.remove("remove");
+          keyboard.properties.shift = false;
+          keyboard.shiftPressed()
         }
         if (e.code == "ShiftRight") {
           shift_left.classList.remove("active");
           shift_left.classList.remove("remove");
+          keyboard.properties.shift = false;
+          keyboard.shiftPressed()
         }
         if (e.code == "AltLeft") {
           alt_right.classList.remove("active");

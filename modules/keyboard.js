@@ -213,6 +213,7 @@ export const keyboard = {
 
   properties: {
     capslock: false,
+    shift: false
   },
 
   init() {
@@ -287,7 +288,16 @@ export const keyboard = {
           } else {
             keyElement.classList.add("shift_key", "shift_right");
           }
-          keyElement.addEventListener("keydown", () => {});
+          keyElement.addEventListener("mousedown", () => {
+            keyElement.classList.add("active");
+            this.properties.shift = true;
+            this.shiftPressed()
+          });
+          keyElement.addEventListener("mouseup", () => {
+            keyElement.classList.remove("active");
+            this.properties.shift = false;
+            this.shiftPressed()
+          });
           break;
 
         case "Tab":
@@ -313,9 +323,15 @@ export const keyboard = {
 
         default:
           keyElement.addEventListener("click", () => {
-            textarea.value += this.properties.capslock
-              ? this.keys.keysLower[i].toUpperCase()
-              : this.keys.keysLower[i].toLowerCase();
+            if (this.properties.shift) {
+              textarea.value += this.keys.keysShift[i];
+            } else if (this.properties.capslock) {
+              textarea.value += this.keys.keysLower[i].toUpperCase()
+            } else {
+              textarea.value += this.keys.keysLower[i].toLowerCase();
+            }
+             
+
           });
           break;
       }
@@ -335,4 +351,14 @@ export const keyboard = {
       }
     }
   },
+
+  shiftPressed() {
+    for (let i = 0; i < this.elements.keys.length; i++) {
+      if (this.properties.shift) {
+        this.elements.keys[i].textContent = this.keys.keysShift[i];
+      } else {
+        this.elements.keys[i].textContent = this.keys.keysLower[i];
+      }
+    }
+  }
 };
