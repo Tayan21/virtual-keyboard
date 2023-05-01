@@ -9,6 +9,7 @@ body{
   font-family: 'Lato', sans-serif;
   transition: .2s;
   display: flex;
+  overflow: hidden;
   flex-direction: column-reverse;
   margin: 100px auto;
   align-items: center;
@@ -19,6 +20,15 @@ body{
   align-items: center;
   flex-direction: column;
   margin: 0 10px;
+}
+
+.description {
+  list-style-type: none;
+  margin: 20px;
+  font-size: 20px;
+  text-align: center;
+  font-weight: bold;
+
 }
 
 .keyboard_wrap{
