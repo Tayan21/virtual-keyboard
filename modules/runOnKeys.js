@@ -6,14 +6,14 @@ export function runOnKeys(args) {
     pressed.add(e.code);
   });
 
-  document.addEventListener('keyup', (e) => {
+  document.addEventListener('keyup', () => {
     if (pressed.length === 0) {
       return;
     }
 
     let runFunc = true;
-    for (const arg of args) {
-      if (!pressed.has(arg)) {
+    for (let i = 0; i < args.length; i += 1) {
+      if (!pressed.has(args[i])) {
         runFunc = false;
         break;
       }

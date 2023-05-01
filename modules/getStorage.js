@@ -1,12 +1,9 @@
-import { keyboard } from './keyboard.js';
-
-export function getStorage() {
-  let storage;
-  if (!keyboard.properties.lang) {
-    localStorage.setItem('lang', JSON.stringify(keyboard.keys.keysLower));
+export function getStorage(lang, eng, rus) {
+  if (!lang) {
+    localStorage.setItem('lang', JSON.stringify(eng));
   } else {
-    localStorage.setItem('lang', JSON.stringify(keyboard.keys.keysLowerRus));
+    localStorage.setItem('lang', JSON.stringify(rus));
   }
-  storage = JSON.parse(localStorage.getItem('lang'));
+  const storage = JSON.parse(localStorage.getItem('lang'));
   return storage;
 }

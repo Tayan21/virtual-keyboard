@@ -5,14 +5,14 @@ export class Description {
   }
 
   init() {
-    let wrapper = document.createElement("ul");
-    wrapper.classList.add("description")
-    let description = document.createElement("li")
-    let language = document.createElement("li")
+    const wrapper = document.createElement('ul');
+    wrapper.classList.add('description');
+    const description = document.createElement('li');
+    const language = document.createElement('li');
     description.innerText = this.os;
     language.innerText = this.lang;
     wrapper.append(description);
     wrapper.append(language);
-    document.body.prepend(wrapper)
+    document.body.prepend(wrapper);
   }
 }

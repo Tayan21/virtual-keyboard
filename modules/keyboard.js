@@ -469,10 +469,6 @@ export const keyboard = {
     ],
   },
 
-  eventHandlers: {
-    oninput: null,
-  },
-
   properties: {
     capslock: false,
     shift: false,
@@ -503,7 +499,7 @@ export const keyboard = {
   createKeys() {
     const fragment = document.createDocumentFragment();
 
-    for (let i = 0; i < this.keys.storage.length; i++) {
+    for (let i = 0; i < this.keys.storage.length; i += 1) {
       const keyElement = document.createElement('div');
       keyElement.classList.add('keys');
       keyElement.textContent = this.keys.storage[i];
@@ -611,7 +607,7 @@ export const keyboard = {
   toggleCapsLock() {
     this.properties.capslock = !this.properties.capslock;
 
-    for (let i = 0; i < this.elements.keys.length; i++) {
+    for (let i = 0; i < this.elements.keys.length; i += 1) {
       if (this.properties.capslock && !this.properties.lang) {
         this.elements.keys[i].textContent = this.keys.keysUpper[i];
       } else if (!this.properties.capslock && !this.properties.lang) {
@@ -625,7 +621,7 @@ export const keyboard = {
   },
 
   shiftPressed() {
-    for (let i = 0; i < this.elements.keys.length; i++) {
+    for (let i = 0; i < this.elements.keys.length; i += 1) {
       if (this.properties.shift && !this.properties.lang) {
         this.elements.keys[i].textContent = this.keys.keysShift[i];
       } else if (!this.properties.shift && !this.properties.lang) {
@@ -640,8 +636,8 @@ export const keyboard = {
 
   switchLang() {
     this.properties.lang = !this.properties.lang;
-    this.storage = getStorage();
-    for (let i = 0; i < this.elements.keys.length; i++) {
+    this.storage = getStorage(this.properties.lang, this.keys.keysLower, this.keys.keysLowerRus);
+    for (let i = 0; i < this.elements.keys.length; i += 1) {
       if (this.properties.lang) {
         this.elements.keys[i].textContent = this.keys.keysLowerRus[i];
       } else {

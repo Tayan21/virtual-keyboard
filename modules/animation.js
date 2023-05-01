@@ -6,19 +6,19 @@ export const animation = {
   init() {
     const keys = document.querySelectorAll('.keys');
     const spaceKey = document.querySelector('.space_key');
-    const shift_left = document.querySelector('.shift_left');
-    const shift_right = document.querySelector('.shift_right');
-    const caps_lock_key = document.querySelector('.caps_lock_key');
-    const alt_left = document.querySelector('.alt_left');
-    const alt_right = document.querySelector('.alt_right');
-    const ctrl_left = document.querySelector('.ctrl_left');
-    const ctrl_right = document.querySelector('.ctrl_right');
-    const win_key = document.querySelector('.win_key');
+    const shiftLeft = document.querySelector('.shift_left');
+    const shiftRight = document.querySelector('.shift_right');
+    const capsLockKey = document.querySelector('.caps_lock_key');
+    const altLeft = document.querySelector('.alt_left');
+    const altRight = document.querySelector('.alt_right');
+    const ctrlLeft = document.querySelector('.ctrl_left');
+    const ctrlRight = document.querySelector('.ctrl_right');
+    const winKey = document.querySelector('.win_key');
     const tabKey = document.querySelector('.tab_key');
     const backspace = document.querySelector('.backspace_key');
     const enter = document.querySelector('.enter_key');
 
-    for (let i = 0; i < keys.length; i++) {
+    for (let i = 0; i < keys.length; i += 1) {
       keys[i].setAttribute('keyname', keys[i].innerText);
       keys[i].setAttribute('lowerCaseName', keys[i].innerText.toLowerCase());
     }
@@ -28,15 +28,15 @@ export const animation = {
     });
 
     window.addEventListener('keydown', (e) => {
-      for (let i = 0; i < keys.length; i++) {
+      for (let i = 0; i < keys.length; i += 1) {
         if (
           e.code === `Key${keys[i].innerText.toUpperCase()}`
-          || e.key === keys[i].getAttribute('keyname') && keys[i].getAttribute('keyname').length < 3
-          || e.key === keys[i].innerText && keys[i].innerText.length < 2
-          || keys[i].innerText === '▲' && e.code === 'ArrowUp'
-          || keys[i].innerText === '▼' && e.code === 'ArrowDown'
-          || keys[i].innerText === '►' && e.code === 'ArrowRight'
-          || keys[i].innerText === '◄' && e.code === 'ArrowLeft'
+          || (e.key === keys[i].getAttribute('keyname') && keys[i].getAttribute('keyname').length < 3)
+          || (e.key === keys[i].innerText && keys[i].innerText.length < 2)
+          || (keys[i].innerText === '▲' && e.code === 'ArrowUp')
+          || (keys[i].innerText === '▼' && e.code === 'ArrowDown')
+          || (keys[i].innerText === '►' && e.code === 'ArrowRight')
+          || (keys[i].innerText === '◄' && e.code === 'ArrowLeft')
         ) {
           keys[i].classList.add('active');
           textarea.value += keys[i].innerText;
@@ -60,52 +60,52 @@ export const animation = {
           textarea.value = textarea.value.substring(0, textarea.value.length - 1);
         }
         if (e.code === 'ShiftLeft') {
-          shift_left.classList.add('active');
-          shift_right.classList.remove('active');
+          shiftLeft.classList.add('active');
+          shiftRight.classList.remove('active');
           keyboard.properties.shift = true;
           keyboard.shiftPressed();
         }
         if (e.code === 'ShiftRight') {
-          shift_right.classList.add('active');
-          shift_left.classList.remove('active');
+          shiftRight.classList.add('active');
+          shiftLeft.classList.remove('active');
           keyboard.properties.shift = true;
           keyboard.shiftPressed();
         }
         if (e.code === 'AltLeft') {
-          alt_left.classList.add('active');
-          alt_right.classList.remove('active');
+          altLeft.classList.add('active');
+          altRight.classList.remove('active');
         }
         if (e.code === 'AltRight') {
-          alt_right.classList.add('active');
-          alt_left.classList.remove('active');
+          altRight.classList.add('active');
+          altLeft.classList.remove('active');
         }
         if (e.code === 'ControlLeft') {
-          ctrl_left.classList.add('active');
+          ctrlLeft.classList.add('active');
         }
         if (e.code === 'ControlRight') {
-          ctrl_right.classList.add('active');
+          ctrlRight.classList.add('active');
         }
         if (e.code === 'CapsLock') {
-          caps_lock_key.classList.add('active');
-          caps_lock_key.classList.toggle('caps_lock_key--active');
+          capsLockKey.classList.add('active');
+          capsLockKey.classList.toggle('caps_lock_key--active');
           keyboard.toggleCapsLock();
         }
         if (e.code === 'MetaLeft') {
-          win_key.classList.add('active');
+          winKey.classList.add('active');
         }
       }
     });
 
     window.addEventListener('keyup', (e) => {
-      for (let i = 0; i < keys.length; i++) {
+      for (let i = 0; i < keys.length; i += 1) {
         if (
           e.code === `Key${keys[i].innerText.toUpperCase()}`
           || e.key === keys[i].getAttribute('keyname')
-          || e.key === keys[i].innerText && keys[i].innerText.length < 2
-          || keys[i].innerText === '▲' && e.code === 'ArrowUp'
-          || keys[i].innerText === '▼' && e.code === 'ArrowDown'
-          || keys[i].innerText === '►' && e.code === 'ArrowRight'
-          || keys[i].innerText === '◄' && e.code === 'ArrowLeft'
+          || (e.key === keys[i].innerText && keys[i].innerText.length < 2)
+          || (keys[i].innerText === '▲' && e.code === 'ArrowUp')
+          || (keys[i].innerText === '▼' && e.code === 'ArrowDown')
+          || (keys[i].innerText === '►' && e.code === 'ArrowRight')
+          || (keys[i].innerText === '◄' && e.code === 'ArrowLeft')
         ) {
           keys[i].classList.remove('active');
           keys[i].classList.add('remove');
@@ -119,39 +119,39 @@ export const animation = {
           tabKey.classList.add('remove');
         }
         if (e.code === 'ShiftLeft') {
-          shift_right.classList.remove('active');
-          shift_right.classList.remove('remove');
+          shiftRight.classList.remove('active');
+          shiftRight.classList.remove('remove');
           keyboard.properties.shift = false;
           keyboard.shiftPressed();
         }
         if (e.code === 'ShiftRight') {
-          shift_left.classList.remove('active');
-          shift_left.classList.remove('remove');
+          shiftLeft.classList.remove('active');
+          shiftLeft.classList.remove('remove');
           keyboard.properties.shift = false;
           keyboard.shiftPressed();
         }
         if (e.code === 'AltLeft') {
-          alt_right.classList.remove('active');
-          alt_right.classList.remove('remove');
+          altRight.classList.remove('active');
+          altRight.classList.remove('remove');
         }
         if (e.code === 'AltRight') {
-          alt_left.classList.remove('active');
-          alt_left.classList.remove('remove');
+          altLeft.classList.remove('active');
+          altLeft.classList.remove('remove');
         }
         if (e.code === 'ControlLeft') {
-          ctrl_left.classList.remove('active');
-          ctrl_left.classList.add('remove');
+          ctrlLeft.classList.remove('active');
+          ctrlLeft.classList.add('remove');
         }
         if (e.code === 'ControlRight') {
-          ctrl_right.classList.remove('active');
-          ctrl_right.classList.add('remove');
+          ctrlRight.classList.remove('active');
+          ctrlRight.classList.add('remove');
         }
         if (e.code === 'MetaLeft') {
-          win_key.classList.remove('active');
-          win_key.classList.add('remove');
+          winKey.classList.remove('active');
+          winKey.classList.add('remove');
         }
         if (e.code === 'CapsLock') {
-          caps_lock_key.classList.remove('active');
+          capsLockKey.classList.remove('active');
         }
         setTimeout(() => {
           keys[i].classList.remove('remove');

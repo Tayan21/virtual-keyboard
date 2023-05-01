@@ -5,6 +5,6 @@ import { Description } from './modules/description.js';
 window.addEventListener('DOMContentLoaded', () => {
   keyboard.init();
   animation.init();
-  let description = new Description("This is Windows keyboard", "To switch language: press left Shift+Alt");
+  const description = new Description('This is Windows keyboard', 'To switch language: press left Shift+Alt');
   description.init();
 });
