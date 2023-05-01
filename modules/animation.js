@@ -30,16 +30,15 @@ export const animation = {
     })
 
     window.addEventListener("keydown", function (e) {
-      console.log(e.key)
       for (let i = 0; i < keys.length; i++) {
         if (
           e.code == `Key${keys[i].innerText.toUpperCase()}` ||
           e.key == keys[i].getAttribute("keyname") && keys[i].getAttribute("keyname").length < 3 ||
           e.key == keys[i].innerText && keys[i].innerText.length < 2 ||
-          e.key == `Arrow${keys[i].getAttribute("keyname")}` ||
-          e.key == `Arrow${keys[i].getAttribute("keyname")}` ||
-          e.key == `Arrow${keys[i].getAttribute("keyname")}` ||
-          e.key == `Arrow${keys[i].getAttribute("keyname")}`
+          keys[i].innerText == "▲" && e.code == "ArrowUp" ||
+          keys[i].innerText == "▼" && e.code == "ArrowDown" ||
+          keys[i].innerText == "►" && e.code == "ArrowRight" ||
+          keys[i].innerText == "◄" && e.code == "ArrowLeft"
         ) {
           keys[i].classList.add("active");
           textarea.value += keys[i].innerText;
@@ -105,10 +104,10 @@ export const animation = {
           e.code == `Key${keys[i].innerText.toUpperCase()}` ||
           e.key == keys[i].getAttribute("keyname") ||
           e.key == keys[i].innerText && keys[i].innerText.length < 2 ||
-          e.key == `Arrow${keys[i].getAttribute("keyname")}` ||
-          e.key == `Arrow${keys[i].getAttribute("keyname")}` ||
-          e.key == `Arrow${keys[i].getAttribute("keyname")}` ||
-          e.key == `Arrow${keys[i].getAttribute("keyname")}`
+          keys[i].innerText == "▲" && e.code == "ArrowUp" ||
+          keys[i].innerText == "▼" && e.code == "ArrowDown" ||
+          keys[i].innerText == "►" && e.code == "ArrowRight" ||
+          keys[i].innerText == "◄" && e.code == "ArrowLeft"
         ) {
           keys[i].classList.remove("active");
           keys[i].classList.add("remove");
