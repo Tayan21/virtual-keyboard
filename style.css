@@ -47,6 +47,11 @@ body{
   position: relative;
 }
 
+.keys:hover {
+  background-color: rgb(128, 126, 128);
+  border-radius: 10px;
+}
+
 .backspace_key{
   width: 128px;
 }

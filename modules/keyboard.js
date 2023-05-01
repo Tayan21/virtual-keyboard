@@ -1,6 +1,5 @@
 import { textarea, backspace, enter, space, tab} from "./textarea.js";
 
-
 export const keyboard = {
   elements: {
     container: null,
@@ -205,6 +204,201 @@ export const keyboard = {
       "Right",
       "Ctrl",
     ],
+    keysLowerRus: [
+      "ё",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "0",
+      "-",
+      "=",
+      "Backspace",
+      "Tab",
+      "й",
+      "ц",
+      "у",
+      "к",
+      "е",
+      "н",
+      "г",
+      "ш",
+      "щ",
+      "з",
+      "х",
+      "ъ",
+      "\\",
+      "CapsLock",
+      "ф",
+      "ы",
+      "в",
+      "а",
+      "п",
+      "р",
+      "о",
+      "л",
+      "д",
+      "ж",
+      "э",
+      "Enter",
+      "Shift",
+      "я",
+      "ч",
+      "с",
+      "м",
+      "и",
+      "т",
+      "ь",
+      "б",
+      "ю",
+      ".",
+      "Up",
+      "Shift",
+      "Ctrl",
+      "Win",
+      "Alt",
+      "Space",
+      "Alt",
+      "Left",
+      "Down",
+      "Right",
+      "Ctrl",
+    ],
+    keysUpperRus: [
+      "Ё",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "0",
+      "-",
+      "=",
+      "Backspace",
+      "Tab",
+      "Й",
+      "Ц",
+      "У",
+      "К",
+      "Е",
+      "Н",
+      "Г",
+      "Ш",
+      "Щ",
+      "З",
+      "Х",
+      "Ъ",
+      "\\",
+      "CapsLock",
+      "Ф",
+      "Ы",
+      "В",
+      "А",
+      "П",
+      "Р",
+      "О",
+      "Л",
+      "Д",
+      "Ж",
+      "Э",
+      "Enter",
+      "Shift",
+      "Я",
+      "Ч",
+      "С",
+      "М",
+      "И",
+      "Т",
+      "Ь",
+      "Б",
+      "Ю",
+      ".",
+      "Up",
+      "Shift",
+      "Ctrl",
+      "Win",
+      "Alt",
+      "Space",
+      "Alt",
+      "Left",
+      "Down",
+      "Right",
+      "Ctrl",
+    ],
+    keysShiftRus: [
+      "Ё",
+      "!",
+      "\"",
+      "№",
+      ";",
+      "%",
+      ":",
+      "?",
+      "*",
+      "(",
+      ")",
+      "_",
+      "+",
+      "Backspace",
+      "Tab",
+      "Й",
+      "Ц",
+      "У",
+      "К",
+      "Е",
+      "Н",
+      "Г",
+      "Ш",
+      "Щ",
+      "З",
+      "Х",
+      "Ъ",
+      "/",
+      "CapsLock",
+      "Ф",
+      "Ы",
+      "В",
+      "А",
+      "П",
+      "Р",
+      "О",
+      "Л",
+      "Д",
+      "Ж",
+      "Э",
+      "Enter",
+      "Shift",
+      "Я",
+      "Ч",
+      "С",
+      "М",
+      "И",
+      "Т",
+      "Ь",
+      "Б",
+      "Ю",
+      ",",
+      "Up",
+      "Shift",
+      "Ctrl",
+      "Win",
+      "Alt",
+      "Space",
+      "Alt",
+      "Left",
+      "Down",
+      "Right",
+      "Ctrl",
+    ],
   },
 
   eventHandlers: {
@@ -213,7 +407,8 @@ export const keyboard = {
 
   properties: {
     capslock: false,
-    shift: false
+    shift: false,
+    lang: false
   },
 
   init() {
@@ -263,7 +458,7 @@ export const keyboard = {
             this.toggleCapsLock();
             keyElement.classList.toggle(
               "caps_lock_key--active",
-              this.properties.capslock
+              // this.properties.capslock
             );
           });
           break;
@@ -323,15 +518,21 @@ export const keyboard = {
 
         default:
           keyElement.addEventListener("click", () => {
-            if (this.properties.shift) {
+            if (this.properties.shift && !this.properties.lang) {
               textarea.value += this.keys.keysShift[i];
-            } else if (this.properties.capslock) {
+            } else if (!this.properties.shift && !this.properties.lang) {
+              textarea.value += this.keys.keysLower[i];
+            } else if (this.properties.capslock && !this.properties.lang) {
               textarea.value += this.keys.keysLower[i].toUpperCase()
-            } else {
-              textarea.value += this.keys.keysLower[i].toLowerCase();
+            } else if (!this.properties.capslock && !this.properties.lang) {
+              textarea.value += this.keys.keysLower[i];
+            } else if (this.properties.capslock && this.properties.lang) {
+              textarea.value += this.keys.keysUpperRus[i];
+            } else if (!this.properties.capslock && this.properties.lang) {
+              textarea.value += this.keys.keysLowerRus[i];
+            } else if (this.properties.shift && this.properties.lang) {
+              textarea.value += this.keys.keysShiftRus[i];
             }
-             
-
           });
           break;
       }
@@ -344,18 +545,38 @@ export const keyboard = {
     this.properties.capslock = !this.properties.capslock;
 
     for (let i = 0; i < this.elements.keys.length; i++) {
-      if (this.properties.capslock) {
+      if (this.properties.capslock && !this.properties.lang) {
         this.elements.keys[i].textContent = this.keys.keysUpper[i];
-      } else {
+      } else if (!this.properties.capslock && !this.properties.lang){
         this.elements.keys[i].textContent = this.keys.keysLower[i];
+      } else if (this.properties.capslock && this.properties.lang){
+        this.elements.keys[i].textContent = this.keys.keysUpperRus[i];
+      } else if (!this.properties.capslock && this.properties.lang){
+        this.elements.keys[i].textContent = this.keys.keysLowerRus[i];
       }
     }
   },
 
   shiftPressed() {
     for (let i = 0; i < this.elements.keys.length; i++) {
-      if (this.properties.shift) {
+      if (this.properties.shift && !this.properties.lang) {
         this.elements.keys[i].textContent = this.keys.keysShift[i];
+      } else if (!this.properties.shift && !this.properties.lang) {
+        this.elements.keys[i].textContent = this.keys.keysLower[i];
+      } else if (this.properties.shift && this.properties.lang) {
+        this.elements.keys[i].textContent = this.keys.keysShiftRus[i];
+      } else if (!this.properties.shift && this.properties.lang){
+        this.elements.keys[i].textContent = this.keys.keysLowerRus[i];
+      }
+    }
+  },
+
+  switchLang() {
+    this.properties.lang = !this.properties.lang;
+
+    for (let i = 0; i < this.elements.keys.length; i++) {
+      if (this.properties.lang) {
+        this.elements.keys[i].textContent = this.keys.keysLowerRus[i];
       } else {
         this.elements.keys[i].textContent = this.keys.keysLower[i];
       }

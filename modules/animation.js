@@ -1,5 +1,6 @@
 import { textarea } from "./textarea.js";
 import { keyboard } from "./keyboard.js";
+import { runOnKeys } from "./runOnKeys.js";
 
 export const animation = {
   init() {
@@ -17,6 +18,8 @@ export const animation = {
     let backspace = document.querySelector(".backspace_key");
     let enter = document.querySelector(".enter_key");
 
+    
+
     for (let i = 0; i < keys.length; i++) {
       keys[i].setAttribute("keyname", keys[i].innerText);
       keys[i].setAttribute("lowerCaseName", keys[i].innerText.toLowerCase());
@@ -27,6 +30,7 @@ export const animation = {
     })
 
     window.addEventListener("keydown", function (e) {
+      console.log(e.key)
       for (let i = 0; i < keys.length; i++) {
         if (
           e.code == `Key${keys[i].innerText.toUpperCase()}` ||
@@ -94,7 +98,7 @@ export const animation = {
         }
       }
     });
-
+    
     window.addEventListener("keyup", function (e) {
       for (let i = 0; i < keys.length; i++) {
         if (
@@ -157,6 +161,6 @@ export const animation = {
         }, 200);
       }
     });
-
+    runOnKeys('ShiftLeft', 'AltLeft')
   },
 };
