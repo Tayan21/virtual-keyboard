@@ -1,3 +1,6 @@
+import { textarea, backspace, enter, space, tab} from "./textarea.js";
+
+
 export const keyboard = {
   elements: {
     container: null,
@@ -7,7 +10,7 @@ export const keyboard = {
   },
 
   keys: {
-    keysUpper: [
+    keysShift: [
       "~",
       "!",
       "@",
@@ -137,6 +140,71 @@ export const keyboard = {
       "Right",
       "Ctrl",
     ],
+    keysUpper: [
+      "`",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "0",
+      "-",
+      "=",
+      "Backspace",
+      "Tab",
+      "Q",
+      "W",
+      "E",
+      "R",
+      "T",
+      "Y",
+      "U",
+      "I",
+      "O",
+      "P",
+      "[",
+      "]",
+      "\\",
+      "CapsLock",
+      "A",
+      "S",
+      "D",
+      "F",
+      "G",
+      "H",
+      "J",
+      "K",
+      "L",
+      ";",
+      "'",
+      "Enter",
+      "Shift",
+      "Z",
+      "X",
+      "C",
+      "V",
+      "B",
+      "N",
+      "M",
+      ",",
+      ".",
+      "/",
+      "Up",
+      "Shift",
+      "Ctrl",
+      "Win",
+      "Alt",
+      "Space",
+      "Alt",
+      "Left",
+      "Down",
+      "Right",
+      "Ctrl",
+    ],
   },
 
   eventHandlers: {
@@ -144,7 +212,6 @@ export const keyboard = {
   },
 
   properties: {
-    value: "",
     capslock: false,
   },
 
@@ -176,17 +243,17 @@ export const keyboard = {
       const keyElement = document.createElement("div");
       keyElement.classList.add("keys");
       keyElement.textContent = this.keys.keysLower[i];
+      keyElement.addEventListener('click', () => {
+        keyElement.classList.add("active", "remove")
+        setTimeout(() => {
+          keyElement.classList.remove("active", "remove")
+        }, 200)
+      })
 
       switch (this.keys.keysLower[i]) {
         case "Backspace":
           keyElement.classList.add("backspace_key");
-          keyElement.addEventListener("click", () => {
-            this.properties.value = this.properties.value.substring(
-              0,
-              this.properties.value.length - 1
-            );
-            this.triggerEvent("oninput");
-          });
+          keyElement.addEventListener("click", backspace);
           break;
 
         case "CapsLock":
@@ -202,10 +269,7 @@ export const keyboard = {
 
         case "Enter":
           keyElement.classList.add("enter_key");
-          keyElement.addEventListener("click", () => {
-            this.properties.value += "\n";
-            this.triggerEvent("oninput");
-          });
+          keyElement.addEventListener("click", enter);
           break;
 
         case "Win":
@@ -214,10 +278,7 @@ export const keyboard = {
 
         case "Space":
           keyElement.classList.add("space_key");
-          keyElement.addEventListener("click", () => {
-            this.properties.value += " ";
-            this.triggerEvent("oninput");
-          });
+          keyElement.addEventListener("click", space);
           break;
 
         case "Shift":
@@ -226,16 +287,12 @@ export const keyboard = {
           } else {
             keyElement.classList.add("shift_key", "shift_right");
           }
-
           keyElement.addEventListener("keydown", () => {});
           break;
 
         case "Tab":
           keyElement.classList.add("tab_key");
-          keyElement.addEventListener("click", () => {
-            this.properties.value += "    ";
-            this.triggerEvent("oninput");
-          });
+          keyElement.addEventListener("click", tab);
           break;
 
         case "Alt":
@@ -256,20 +313,15 @@ export const keyboard = {
 
         default:
           keyElement.addEventListener("click", () => {
-            this.properties.value += this.properties.capslock
+            textarea.value += this.properties.capslock
               ? this.keys.keysLower[i].toUpperCase()
               : this.keys.keysLower[i].toLowerCase();
-            this.triggerEvent("oninput");
           });
           break;
       }
       fragment.appendChild(keyElement);
     }
     return fragment;
-  },
-
-  triggerEvent(handlerName) {
-    console.log("Event Name hhh " + handlerName);
   },
 
   toggleCapsLock() {

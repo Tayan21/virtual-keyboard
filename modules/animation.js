@@ -1,3 +1,6 @@
+import { textarea } from "./textarea.js";
+import { keyboard } from "./keyboard.js";
+
 export const animation = {
   init() {
     let keys = document.querySelectorAll(".keys");
@@ -11,32 +14,43 @@ export const animation = {
     let ctrl_right = document.querySelector(".ctrl_right");
     let win_key = document.querySelector(".win_key");
     let tabKey = document.querySelector(".tab_key");
+    let backspace = document.querySelector(".backspace_key");
 
     for (let i = 0; i < keys.length; i++) {
-      keys[i].setAttribute("keyname", keys[i].innerText.toUpperCase());
+      keys[i].setAttribute("keyname", keys[i].innerText);
       keys[i].setAttribute("lowerCaseName", keys[i].innerText.toLowerCase());
     }
+    
+    textarea.addEventListener('focus', (e) => {
+      e.preventDefault()
+    })
 
     window.addEventListener("keydown", function (e) {
       for (let i = 0; i < keys.length; i++) {
         if (
-          e.key == keys[i].getAttribute("keyname") ||
-          e.key == keys[i].getAttribute("lowerCaseName") ||
-          e.key == `Arrow${keys[i].getAttribute("keyname")}` || 
-          e.key == `Arrow${keys[i].getAttribute("keyname")}` || 
-          e.key == `Arrow${keys[i].getAttribute("keyname")}` || 
+          e.code == `Key${keys[i].innerText.toUpperCase()}` ||
+          e.key == keys[i].getAttribute("keyname") && keys[i].getAttribute("keyname").length < 3 ||
+          e.key == `Arrow${keys[i].getAttribute("keyname")}` ||
+          e.key == `Arrow${keys[i].getAttribute("keyname")}` ||
+          e.key == `Arrow${keys[i].getAttribute("keyname")}` ||
           e.key == `Arrow${keys[i].getAttribute("keyname")}`
         ) {
-
           keys[i].classList.add("active");
+          textarea.value += keys[i].innerText;
+          console.log('r')
         }
-        
 
-        if (e.code == "Space") {
+        if (e.code == "Space" && keys[i].innerText == 'Space') {
           spaceKey.classList.add("active");
+          textarea.value += ' ';
         }
-        if (e.code == "Tab") {
+        if (e.code == "Tab" && keys[i].innerText == 'Tab') {
+          e.preventDefault();
           tabKey.classList.add("active");
+          textarea.value += '     ';
+        }
+        if (e.code == "Backspace" && keys[i].innerText == 'Backspace') {
+          textarea.value = textarea.value.substring(0, textarea.value.length - 1);
         }
         if (e.code == "ShiftLeft") {
           shift_right.classList.remove("active");
@@ -51,13 +65,15 @@ export const animation = {
           alt_left.classList.remove("active");
         }
         if (e.code == "ControlLeft") {
-          ctrl_left.classList.add('active')
+          ctrl_left.classList.add("active");
         }
         if (e.code == "ControlRight") {
-          ctrl_right.classList.add('active')
+          ctrl_right.classList.add("active");
         }
         if (e.code == "CapsLock") {
           caps_lock_key.classList.add("active");
+          caps_lock_key.classList.toggle("caps_lock_key--active");
+          keyboard.toggleCapsLock()
         }
         if (e.code == "MetaLeft") {
           win_key.classList.add("active");
@@ -68,14 +84,13 @@ export const animation = {
     window.addEventListener("keyup", function (e) {
       for (let i = 0; i < keys.length; i++) {
         if (
+          e.code == `Key${keys[i].innerText.toUpperCase()}` ||
           e.key == keys[i].getAttribute("keyname") ||
-          e.key == keys[i].getAttribute("lowerCaseName") ||
-          e.key == `Arrow${keys[i].getAttribute("keyname")}` || 
-          e.key == `Arrow${keys[i].getAttribute("keyname")}` || 
-          e.key == `Arrow${keys[i].getAttribute("keyname")}` || 
+          e.key == `Arrow${keys[i].getAttribute("keyname")}` ||
+          e.key == `Arrow${keys[i].getAttribute("keyname")}` ||
+          e.key == `Arrow${keys[i].getAttribute("keyname")}` ||
           e.key == `Arrow${keys[i].getAttribute("keyname")}`
         ) {
-
           keys[i].classList.remove("active");
           keys[i].classList.add("remove");
         }
@@ -123,5 +138,6 @@ export const animation = {
         }, 200);
       }
     });
+
   },
 };

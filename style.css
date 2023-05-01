@@ -9,7 +9,7 @@ body{
   font-family: 'Lato', sans-serif;
   transition: .2s;
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   margin: 100px auto;
   align-items: center;
 }
@@ -17,7 +17,6 @@ body{
 .container{
   display: flex;
   align-items: center;
-  height: 100vh;
   flex-direction: column;
   margin: 0 10px;
 }
