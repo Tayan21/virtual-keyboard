@@ -1,4 +1,5 @@
 import { textarea, backspace, enter, space, tab} from "./textarea.js";
+import { getStorage } from "./getStorage.js";
 
 export const keyboard = {
   elements: {
@@ -399,6 +400,71 @@ export const keyboard = {
       "Right",
       "Ctrl",
     ],
+    storage: JSON.parse(localStorage.getItem('lang')) || [
+      "`",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "0",
+      "-",
+      "=",
+      "Backspace",
+      "Tab",
+      "q",
+      "w",
+      "e",
+      "r",
+      "t",
+      "y",
+      "u",
+      "i",
+      "o",
+      "p",
+      "[",
+      "]",
+      "\\",
+      "CapsLock",
+      "a",
+      "s",
+      "d",
+      "f",
+      "g",
+      "h",
+      "j",
+      "k",
+      "l",
+      ";",
+      "'",
+      "Enter",
+      "Shift",
+      "z",
+      "x",
+      "c",
+      "v",
+      "b",
+      "n",
+      "m",
+      ",",
+      ".",
+      "/",
+      "Up",
+      "Shift",
+      "Ctrl",
+      "Win",
+      "Alt",
+      "Space",
+      "Alt",
+      "Left",
+      "Down",
+      "Right",
+      "Ctrl",
+    ] 
   },
 
   eventHandlers: {
@@ -421,7 +487,7 @@ export const keyboard = {
     this.elements.keyboardWrap.classList.add("keyboard_wrap");
     this.elements.keyboardKeys.classList.add("keyboard_keys");
     this.elements.row.classList.add("row");
-
+    
     this.elements.row.appendChild(this.createKeys());
 
     this.elements.keys = this.elements.row.querySelectorAll(".keys");
@@ -434,11 +500,11 @@ export const keyboard = {
 
   createKeys() {
     const fragment = document.createDocumentFragment();
-
-    for (let i = 0; i < this.keys.keysLower.length; i++) {
+    
+    for (let i = 0; i < this.keys.storage.length; i++) {
       const keyElement = document.createElement("div");
       keyElement.classList.add("keys");
-      keyElement.textContent = this.keys.keysLower[i];
+      keyElement.textContent = this.keys.storage[i];
       keyElement.addEventListener('click', () => {
         keyElement.classList.add("active", "remove")
         setTimeout(() => {
@@ -446,7 +512,7 @@ export const keyboard = {
         }, 200)
       })
 
-      switch (this.keys.keysLower[i]) {
+      switch (this.keys.storage[i]) {
         case "Backspace":
           keyElement.classList.add("backspace_key");
           keyElement.addEventListener("click", backspace);
@@ -478,7 +544,7 @@ export const keyboard = {
           break;
 
         case "Shift":
-          if (this.keys.keysLower[i - 1] == "Enter") {
+          if (this.keys.storage[i - 1] == "Enter") {
             keyElement.classList.add("shift_key", "shift_left");
           } else {
             keyElement.classList.add("shift_key", "shift_right");
@@ -501,7 +567,7 @@ export const keyboard = {
           break;
 
         case "Alt":
-          if (this.keys.keysLower[i - 1] == "Win") {
+          if (this.keys.storage[i - 1] == "Win") {
             keyElement.classList.add("alt_key", "alt_left");
           } else {
             keyElement.classList.add("alt_key", "alt_right");
@@ -509,7 +575,7 @@ export const keyboard = {
           break;
 
         case "Ctrl":
-          if (this.keys.keysLower[i - 1] == "Shift") {
+          if (this.keys.storage[i - 1] == "Shift") {
             keyElement.classList.add("ctrl_key", "ctrl_left");
           } else {
             keyElement.classList.add("ctrl_key", "ctrl_right");
@@ -573,7 +639,7 @@ export const keyboard = {
 
   switchLang() {
     this.properties.lang = !this.properties.lang;
-
+    this.storage = getStorage()
     for (let i = 0; i < this.elements.keys.length; i++) {
       if (this.properties.lang) {
         this.elements.keys[i].textContent = this.keys.keysLowerRus[i];
