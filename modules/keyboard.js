@@ -583,10 +583,10 @@ export const keyboard = {
           keyElement.addEventListener('click', () => {
             if (this.properties.shift && !this.properties.lang) {
               textarea.value += this.keys.keysShift[i];
+            } else if (this.properties.capslock && !this.properties.lang) {
+              textarea.value += this.keys.keysUpper[i];
             } else if (!this.properties.shift && !this.properties.lang) {
               textarea.value += this.keys.keysLower[i];
-            } else if (this.properties.capslock && !this.properties.lang) {
-              textarea.value += this.keys.keysLower[i].toUpperCase();
             } else if (!this.properties.capslock && !this.properties.lang) {
               textarea.value += this.keys.keysLower[i];
             } else if (this.properties.capslock && this.properties.lang) {

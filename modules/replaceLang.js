@@ -1,6 +1,6 @@
 import { keyboard } from './keyboard.js';
 
-export function runOnKeys(args) {
+export function replaceLang(args) {
   const pressed = new Set();
   document.addEventListener('keydown', (e) => {
     pressed.add(e.code);

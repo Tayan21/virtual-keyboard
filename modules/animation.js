@@ -1,6 +1,6 @@
 import { textarea } from './textarea.js';
 import { keyboard } from './keyboard.js';
-import { runOnKeys } from './runOnKeys.js';
+import { replaceLang } from './replaceLang.js';
 
 export const animation = {
   init() {
@@ -158,6 +158,6 @@ export const animation = {
         }, 200);
       }
     });
-    runOnKeys(['ShiftLeft', 'AltLeft']);
+    replaceLang(['ShiftLeft', 'AltLeft']);
   },
 };
