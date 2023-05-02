@@ -1,6 +1,6 @@
-import { keyboard } from './modules/keyboard.js';
-import { animation } from './modules/animation.js';
-import { Description } from './modules/description.js';
+import keyboard from './modules/keyboard.js';
+import animation from './modules/animation.js';
+import Description from './modules/description.js';
 
 window.addEventListener('DOMContentLoaded', () => {
   keyboard.init();

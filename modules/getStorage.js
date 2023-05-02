@@ -1,4 +1,4 @@
-export function getStorage(lang, eng, rus) {
+export default function getStorage(lang, eng, rus) {
   if (!lang) {
     localStorage.setItem('lang', JSON.stringify(eng));
   } else {

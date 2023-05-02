@@ -1,4 +1,4 @@
-export class Description {
+export default class Description {
   constructor(os, lang) {
     this.os = os;
     this.lang = lang;
