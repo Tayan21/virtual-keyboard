@@ -76,7 +76,7 @@ const animation = {
           altLeft.classList.add('active');
           altRight.classList.remove('active');
         }
-        if (e.code === 'AltRight') {
+        if (e.code === 'AltRight' && keys[i].innerText === 'Alt') {
           e.preventDefault()
           altRight.classList.add('active');
           altLeft.classList.remove('active');
