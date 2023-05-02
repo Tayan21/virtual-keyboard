@@ -72,10 +72,12 @@ const animation = {
           keyboard.shiftPressed();
         }
         if (e.code === 'AltLeft') {
+          e.preventDefault()
           altLeft.classList.add('active');
           altRight.classList.remove('active');
         }
         if (e.code === 'AltRight') {
+          e.preventDefault()
           altRight.classList.add('active');
           altLeft.classList.remove('active');
         }
